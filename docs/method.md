@@ -13,6 +13,11 @@ The user could thread PETG filament through each component separately. The
 normal wing assembled successfully. The original carrier would not accept
 the filament into its first knuckle while interleaved with the holster.
 
+**Current physical status:** the revision seats and interleaves with the holster.
+The filament reaches and starts entering the last hinge section, but remains
+tight. Full-length pin passage is unconfirmed. Reproducing the digital file
+byte-for-byte does not establish complete physical assembly.
+
 The working wing is the useful control here. This report concerns the
 supplied meshes and their measured fit, rather than the quality of the
 designer's modeling work or the behavior of every parametric version.
@@ -35,6 +40,10 @@ wing's is approximately 7.5 mm. Thus the carrier is tighter both axially and
 around the knuckles. Narrower teeth alone do not address the root collision.
 
 ## The important collision is at the gap roots
+
+Here, "assembled" coordinates mean the holster's original coordinates, with
+the wing and carrier rigidly aligned to its pin axis. The exact operations
+are given below; no part is scaled to make these comparisons.
 
 With the pin axes coincident and teeth centered in the holster's gaps, the
 original carrier overlaps the holster by approximately 28.69258 mm³ in the
@@ -71,6 +80,17 @@ not eliminate it at the sampled favorable angles.
 6. Check for one closed solid, aligned bores, preserved carrier body, and
    clearance against the actual holster. Print a small hinge test before
    committing to another complete carrier.
+
+For the designer's original coordinate frames: the carrier cut is at
+Y=-28.3582 mm and the donor neck reaches Y=-28.8582 mm. In the wing's original
+frame, the seam is Y=8.3062 mm and the donor selection is Y<=8.8062 mm.
+The script's positive rotations follow the right-hand rule about assembled
++Z (counterclockwise when viewed from +Z toward the origin). The 0–90° samples
+check the outward-opening side established by the working wing's alignment;
+they do not certify other angles, mirrored versions, or a continuous path.
+
+These CAD steps have improved the observed seating. The final physical
+pin-through test remains incomplete.
 
 This is a local hinge replacement. Enlarging the bore or scaling the whole
 carrier would change different features and would not reproduce this fix.

@@ -15,6 +15,7 @@ from auxarc.carrier import (
     mesh_facts,
     require_solid,
     validate,
+    validate_replacement,
     volume,
 )
 
@@ -134,3 +135,32 @@ def test_validation_accepts_separated_parts_and_clear_pin():
     c, original, holster = synthetic_validation()
     result = validate(original, original, holster, c)
     assert all(result["checks"].values())
+
+
+def test_pin_check_includes_far_holster_section():
+    c, original, _ = synthetic_validation()
+    # The reference holster has material around its hinge axis up to Z=102.0609.
+    # An obstruction at Z=95 must not escape the pin test as it did with Zmax=88.
+    c["pin_z_range"] = case()["pin_z_range"]
+    blocked_last_section = box([-0.1, -0.1, 95], [0.1, 0.1, 96])
+    result = validate(original, original, blocked_last_section, c)
+    assert not result["checks"]["straight_1_75_mm_pin_clear"]
+
+
+def test_replacement_checks_detect_lost_hinge_and_truncated_coupon():
+    c = case()
+    c.update(
+        carrier_translation=[0, 0, 0],
+        seam_y_aligned=0,
+        coupon_bounds_original=[[-2, -2, 0], [2, 2, 4]],
+    )
+    original = box([-2, -3, 0], [2, 2, 4])
+    donor = box([-1, -3, 0.1], [1, 1, 3.9])
+    fixed, coupon = correct_geometry(original, donor, c)
+    assert all(validate_replacement(fixed, coupon, donor, c)["checks"].values())
+    damaged = clip(fixed, [-10, -10, -10], [10, 0.5, 10])
+    assert not validate_replacement(damaged, coupon, donor, c)["checks"]["donor_hinge_preserved"]
+    truncated = clip(coupon, [-10, -10, -10], [coupon.bounds[1, 0] - 0.5, 10, 10])
+    assert not validate_replacement(fixed, truncated, donor, c)["checks"][
+        "coupon_matches_intended_cut"
+    ]

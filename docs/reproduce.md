@@ -59,7 +59,9 @@ uv run --locked python -m auxarc build \
 Expected success begins with `PASS:`. Results appear only after the exported
 STLs reload and pass validation. The command refuses an existing output
 directory; choose a fresh output path for another run. Inputs are never
-overwritten.
+overwritten. Output publication reserves a new directory exclusively. An I/O
+failure while copying validated results may leave a partial result directory;
+the command then exits nonzero, and that directory is never silently reused.
 
 Output files:
 
@@ -69,7 +71,7 @@ Output files:
 | `Carrier_Hinge_Fit_Test_v1.stl` | Small three-tooth test, oriented flat on bed |
 | `original-validation.json` | Demonstrates the original collision |
 | `corrected-validation.json` | Solid, collision, body-preservation, and pin checks |
-| `manifest.json` | Input/output hashes, mesh facts, case hash, dependency versions |
+| `manifest.json` | Input/output hashes, mesh facts, case hash, dependency and runtime versions |
 
 All meshes and generated results stay local under ignored directories.
 The case is specific; a failure is a reason to inspect the inputs, rather
@@ -113,7 +115,7 @@ uv run --locked ruff check .
 uv run --locked ruff format --check .
 ```
 
-Without local reference meshes, the three integration tests explicitly skip.
+Without local reference meshes, the five integration tests explicitly skip.
 To include them:
 
 ```sh
@@ -126,3 +128,6 @@ The reference directory must contain `carrier_aligned.stl`, `wing_aligned.stl`,
 and `holster_reference.stl`. `AUXARC_PRINTED_STL` points to the previously
 supplied print file, not a newly generated candidate. This enables a geometric
 comparison against that file. It does not establish full physical pin passage.
+The separate historical byte-comparison test explicitly skips if the runtime
+or dependency versions differ from the recorded manifest; geometric/report
+comparisons still run with local reference meshes.

@@ -6,7 +6,9 @@
     "positive_volume": true,
     "body_preserved": true,
     "no_holster_interference_at_sampled_poses": true,
-    "straight_1_75_mm_pin_clear": true
+    "straight_1_75_mm_pin_clear": true,
+    "donor_hinge_preserved": true,
+    "coupon_matches_intended_cut": true
   },
   "tolerance_mm3": 0.0001,
   "body_guard_y_original_mm": -28.9,
@@ -110,5 +112,13 @@
     "watertight": true,
     "consistent_winding": true,
     "single_solid": true
+  },
+  "replacement": {
+    "checks": {
+      "donor_hinge_preserved": true,
+      "coupon_matches_intended_cut": true
+    },
+    "hinge_difference_mm3": 0.0,
+    "coupon_difference_mm3": 0.0
   }
 }

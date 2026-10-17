@@ -5,8 +5,9 @@ AuxArc's IWB holster, working wing, and magazine-carrier STL files.
 
 **Result so far:** the revised carrier seats in the user's printed holster.
 Full-length passage of the PETG filament pin remains **unconfirmed**: it is
-tight, and the user stopped rather than force it. The code reproduces the
-previously supplied revised STL byte-for-byte on the recorded environment.
+tight, and the user does not want to force it. Using the private saved aligned
+reference meshes, the code reproduces the previously supplied revised STL
+byte-for-byte on the recorded environment.
 That proves reproduction of the file; it does not prove complete assembly.
 
 Original design: [AuxArc's Parametric IWB Holster for Glock Platform](https://makerworld.com/en/models/3422334-parametric-iwb-holster-for-glock-platform#profileId-3899917).
@@ -42,8 +43,9 @@ scaled globally.
 
 The receiver gaps are 10 mm wide: centered side clearance increases from
 0.1 to 0.2 mm per side. The retained carrier body, including its cavity and
-mounting features behind the hinge seam, is checked for added or removed
-volume. A small three-tooth test piece is generated too.
+mounting features at least 0.5418 mm behind the hinge seam, is checked for
+added or removed volume. The front hinge is checked against the donor, and
+a small three-tooth test piece is checked against its intended cut.
 
 ## Start here
 
@@ -51,6 +53,7 @@ volume. A small three-tooth test piece is generated too.
   This explains the change without requiring Python or Git knowledge.
 - **To run the code:** [Download, setup, inputs, and reproduction commands](docs/reproduce.md).
 - **To assess the evidence:** [What was checked and what remains uncertain](docs/validation.md).
+- **Independent review:** [Claude and Amp/Oracle findings and resolutions](docs/review.md).
 - **Before sharing meshes:** [Attribution and the source model's license](NOTICE.md).
 
 The repository includes code, case coordinates, tests, dependency locks, and

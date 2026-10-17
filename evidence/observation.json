@@ -1,6 +1,7 @@
 {
   "recorded_date": "2026-10-17",
-  "physical_status": "Carrier seating/interleaving reported; full-length PETG pin passage unconfirmed.",
+  "physical_status": "Carrier seating/interleaving reported; PETG filament reaches/starts entering the last hinge section; full-length passage remains unconfirmed.",
+  "user_observation": "The filament is tight; the user does not want to force it and risk breaking the part.",
   "photos_published": false,
   "file_reproduction": {
     "environment": "Python 3.12, macOS ARM64; package versions in reference-manifest.json",

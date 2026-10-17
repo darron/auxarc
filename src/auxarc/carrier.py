@@ -4,6 +4,7 @@ No model geometry is embedded here. Constants belong to the documented case.
 """
 
 import hashlib
+import io
 from pathlib import Path
 
 import numpy as np
@@ -44,17 +45,49 @@ def require_solid(mesh, name, single=False):
         raise FitError(f"{name}: expected a single connected solid")
 
 
-def load_mesh(path):
+def load_mesh(path, data=None):
     path = Path(path)
-    if not path.is_file():
+    if data is None and not path.is_file():
         raise FitError(f"Input file does not exist: {path.name}")
-    mesh = trimesh.load_mesh(path)
+    if data is None:
+        data = path.read_bytes()
+    mesh = trimesh.load_mesh(io.BytesIO(data), file_type=path.suffix.lstrip("."))
     require_solid(mesh, path.name)
     return mesh
 
 
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def symmetric_difference_volume(a, b):
+    return sum(
+        volume(trimesh.boolean.difference([x, y], engine="manifold")) for x, y in [(a, b), (b, a)]
+    )
+
+
+def validate_replacement(candidate_original, coupon, wing_aligned, config):
+    """Check positive hinge presence, plus the exported coupon's intended extent."""
+    candidate = candidate_original.copy()
+    candidate.apply_translation(config["carrier_translation"])
+    lower, upper = _bounds_covering(candidate, wing_aligned)
+    # Exclude the body/blend boundary; beyond it the donor must be unchanged.
+    lower[1] = config["seam_y_aligned"] + 0.001
+    actual, expected = [clip(m, lower, upper) for m in [candidate, wing_aligned]]
+    hinge_difference = symmetric_difference_volume(actual, expected)
+    expected_coupon = clip(candidate_original, *config["coupon_bounds_original"])
+    expected_coupon.apply_transform(np.array(config["coupon_orientation"], dtype=float))
+    expected_coupon.apply_translation(-expected_coupon.bounds[0])
+    coupon_difference = symmetric_difference_volume(coupon, expected_coupon)
+    tol = config["volume_tolerance_mm3"]
+    return {
+        "checks": {
+            "donor_hinge_preserved": hinge_difference < tol,
+            "coupon_matches_intended_cut": coupon_difference < tol,
+        },
+        "hinge_difference_mm3": hinge_difference,
+        "coupon_difference_mm3": coupon_difference,
+    }
 
 
 def align_inputs(meshes, config, frame):

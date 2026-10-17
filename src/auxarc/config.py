@@ -9,6 +9,20 @@ def validate_config(config):
     try:
         if config["schema_version"] != 1 or config["units"] != "mm":
             raise ValueError("expected schema 1 and mm units")
+        signatures = config["source_signatures_original"]
+        if not isinstance(signatures, dict) or set(signatures) != {"carrier", "wing", "holster"}:
+            raise ValueError("source signatures must include carrier, wing, and holster")
+        for name, signature in signatures.items():
+            faces = signature["faces"]
+            bounds = np.asarray(signature["bounds"], dtype=float)
+            if (
+                type(faces) is not int
+                or faces <= 0
+                or bounds.shape != (2, 3)
+                or not np.isfinite(bounds).all()
+                or not (bounds[1] > bounds[0]).all()
+            ):
+                raise ValueError(f"invalid source signature for {name}")
         for key, shape in [
             ("carrier_translation", (3,)),
             ("pin_axis", (3,)),
@@ -44,6 +58,11 @@ def validate_config(config):
         for key in ["seam_y_aligned", "body_guard_y_original"]:
             if not np.isfinite(config[key]):
                 raise ValueError(f"{key} must be finite")
+        donor_end = (
+            config["seam_y_aligned"] - config["carrier_translation"][1] - config["graft_overlap"]
+        )
+        if not donor_end - 1 < config["body_guard_y_original"] < donor_end:
+            raise ValueError("body guard must lie within 1 mm behind the donor overlap")
         if config["pin_z_range"][1] <= config["pin_z_range"][0]:
             raise ValueError("pin_z_range must increase")
         bounds = np.array(config["coupon_bounds_original"])

@@ -1,7 +1,13 @@
 {
   "case": "glock-iwb-v1",
   "input_frame": "aligned",
-  "case_sha256": "a7c9909b422054eb842a742b9b40314e02078749e073877969832804845ad71d",
+  "runtime": {
+    "python": "3.12.13",
+    "system": "Darwin",
+    "machine": "arm64",
+    "platform": "macOS-27.0.1-arm64-arm-64bit"
+  },
+  "case_sha256": "39ea5e0202acde83b34e592002dc355c3e672aba38f8874359ce9b696b3b1383",
   "inputs": {
     "carrier": {
       "file": "carrier_aligned.stl",

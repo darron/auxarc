@@ -1,7 +1,10 @@
 """CLI publishing outputs only after the exported files pass geometry checks."""
 
 import argparse
+import hashlib
 import json
+import platform
+import shutil
 import sys
 import tempfile
 from importlib.metadata import version
@@ -17,6 +20,7 @@ from .carrier import (
     sha256,
     source_signatures_match,
     validate,
+    validate_replacement,
 )
 from .config import validate_config
 
@@ -28,11 +32,34 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, allow_nan=False) + "\n")
 
 
+def runtime_facts():
+    return {
+        "python": platform.python_version(),
+        "system": platform.system(),
+        "machine": platform.machine(),
+        "platform": platform.platform(),
+    }
+
+
+def publish_directory(stage, destination):
+    # mkdir is an exclusive reservation; rename could replace an existing empty
+    # directory on POSIX. Exclusive file creation also prevents overwriting files
+    # another process might add after this reservation.
+    destination.mkdir()
+    for source in stage.iterdir():
+        with source.open("rb") as reader, (destination / source.name).open("xb") as writer:
+            shutil.copyfileobj(reader, writer)
+
+
 def build(args):
-    config = json.loads(args.case.read_text())
+    case_bytes = args.case.read_bytes()
+    config = json.loads(case_bytes)
     validate_config(config)
     paths = {name: getattr(args, name) for name in ["carrier", "wing", "holster"]}
-    meshes = {name: load_mesh(path) for name, path in paths.items()}
+    snapshots = {
+        name: path.read_bytes() if path.is_file() else None for name, path in paths.items()
+    }
+    meshes = {name: load_mesh(path, snapshots[name]) for name, path in paths.items()}
     originals = source_signatures_match(meshes, config, args.frame)
     aligned = align_inputs(meshes, config, args.frame)
     if args.output.exists():
@@ -54,6 +81,9 @@ def build(args):
         corrected_report = validate(
             corrected_export, originals["carrier"], aligned["holster"], config
         )
+        replacement = validate_replacement(corrected_export, coupon_export, aligned["wing"], config)
+        corrected_report["replacement"] = replacement
+        corrected_report["checks"].update(replacement["checks"])
         if not all(corrected_report["checks"].values()):
             raise FitError(
                 "Export failed geometry checks: "
@@ -66,9 +96,14 @@ def build(args):
         manifest = {
             "case": config["case"],
             "input_frame": args.frame,
-            "case_sha256": sha256(args.case),
+            "runtime": runtime_facts(),
+            "case_sha256": hashlib.sha256(case_bytes).hexdigest(),
             "inputs": {
-                name: {"file": path.name, "sha256": sha256(path), "mesh": mesh_facts(meshes[name])}
+                name: {
+                    "file": path.name,
+                    "sha256": hashlib.sha256(snapshots[name]).hexdigest(),
+                    "mesh": mesh_facts(meshes[name]),
+                }
                 for name, path in paths.items()
             },
             "dependencies": {
@@ -80,10 +115,7 @@ def build(args):
             },
         }
         write_json(stage / "manifest.json", manifest)
-        # Refuse replacing another result directory, including a concurrent build.
-        if args.output.exists():
-            raise FitError("Output directory appeared during build; nothing overwritten")
-        stage.rename(args.output)
+        publish_directory(stage, args.output)
     print(f"PASS: {FULL} and {COUPON}; original collision reproduced; exported fit checks pass.")
     return 0
 

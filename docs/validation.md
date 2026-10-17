@@ -5,6 +5,7 @@
 The user reported that the revised carrier fits into the holster. A later
 photo shows interleaved printed knuckles. The user then clarified that the
 PETG filament is tight and they are unsure it has passed all the way through.
+In a further update, the filament was starting to enter the last hinge section.
 
 Therefore the physical result is **improved seating/interleaving, with
 full-length pin passage unconfirmed**. The record does not establish an
@@ -30,8 +31,12 @@ motion sweep or proof of an unobstructed insertion path. Original interference
 persists at sampled favorable angles, even though it becomes much smaller.
 
 The pin check uses a 96-sided cylinder of radius 0.875 mm over assembled
-Z=6..88 mm. This avoids the holster's closed lower end, which is not part of
-the pin channel. It checks both carrier axial positions. An ideal pin clearing
+Z=6..103 mm. A separate local intersection with a 4.01 mm-radius cylinder
+around the hinge axis placed the upper end of holster material at approximately
+Z=102.0609 mm. The pin check therefore includes that last section, while
+avoiding the holster's closed lower end below Z=5.5409 mm. This extends the
+earlier investigation's shorter Z=6..88 mm pin check without changing either
+output STL. It checks both carrier axial positions. An ideal pin clearing
 each aligned model does not mean their colliding original solids can actually
 occupy that alignment. Nor does it measure printing errors in a 2.2 mm bore.
 
@@ -40,6 +45,12 @@ behind original carrier Y=-28.9 mm. This lies beyond the replacement seam
 Y=-28.3582 mm and the donor's 0.5 mm overlap. The gap between the comparison
 plane and graft cut avoids coincident-plane numerical artifacts. This is an
 explicit region check, not a claim that the hinge itself was preserved.
+
+Separate positive-material checks compare the replacement hinge against the
+working wing beyond aligned Y=-15.3097 mm (0.001 mm beyond the seam), using
+two-way Boolean difference. They also compare the exported coupon against the
+specified cut and orientation of the corrected carrier. Thus deleting hinge
+material or truncating the coupon cannot pass merely by avoiding collisions.
 
 All collision/difference pass thresholds are **0.0001 mm³**. This numerical
 threshold is neither a manufacturing tolerance nor a clearance guarantee.
@@ -78,7 +89,12 @@ rigid alignment, the graft's changed and retained regions, invalid meshes,
 body loss, pin obstruction, solid collision, malformed case data, missing
 inputs, and wrong variants. Local integration tests exercise the full CLI,
 both coordinate modes, refusal to overwrite results, and comparison against
-the originally supplied full-carrier STL.
+the originally supplied full-carrier STL. They check both recorded output
+hashes on the recorded runtime, published mesh facts and reports, and geometric
+equivalence of coordinate modes. Another test changes input and case files
+during a build: the manifest must hash the same byte snapshots actually
+processed. Public tests also reject missing source signatures, detect deleted
+hinge material/truncated coupons, and check the published case hash.
 
 GitHub CI runs the public synthetic suite on Linux and macOS. It explicitly
 does not run the source-model integration tests, because it has no licensed

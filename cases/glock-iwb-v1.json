@@ -15,7 +15,7 @@
   "angles_deg": [0,15,30,45,60,75,90],
   "axial_offsets_mm": [0,20],
   "pin_radius": 0.875,
-  "pin_z_range": [6,88],
+  "pin_z_range": [6,103],
   "volume_tolerance_mm3": 0.0001,
   "signature_tolerance_mm": 0.0001,
   "source_signatures_original": {
