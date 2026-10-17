@@ -93,7 +93,7 @@ uv run --locked python -m auxarc build \
 ```
 
 `--frame aligned` means the carrier and wing have **already** undergone the
-operations in [method.md](method.md). Do not use it for ordinary original STLs.
+operations in [the technical details](technical-details.md). Do not use it for ordinary original STLs.
 The holster is unchanged in either mode.
 
 The reference hashes are published in [the evidence manifest](../evidence/reference-manifest.json).
