@@ -1,0 +1,31 @@
+[project]
+name = "auxarc-fit-study"
+version = "0.1.0"
+description = "Reproduce and validate a measured magazine-carrier hinge fit correction"
+requires-python = ">=3.12"
+dependencies = [
+  "numpy==2.5.4",
+  "trimesh==5.1.1",
+  "manifold3d==3.5.4",
+  "networkx==3.7",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/auxarc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires locally supplied upstream meshes"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]

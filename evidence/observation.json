@@ -1,0 +1,11 @@
+{
+  "recorded_date": "2026-10-17",
+  "physical_status": "Carrier seating/interleaving reported; full-length PETG pin passage unconfirmed.",
+  "photos_published": false,
+  "file_reproduction": {
+    "environment": "Python 3.12, macOS ARM64; package versions in reference-manifest.json",
+    "comparison": "Exact byte comparison of both regenerated STLs against the previously supplied files",
+    "both_files_identical": true
+  },
+  "source_model_redistributed": false
+}

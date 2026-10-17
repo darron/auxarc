@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "case": "glock-iwb-v1",
+  "units": "mm",
+  "source_url": "https://makerworld.com/en/models/3422334-parametric-iwb-holster-for-glock-platform#profileId-3899917",
+  "source_designer": "AuxArc",
+  "carrier_translation": [2.161, 13.0475, 2.8961],
+  "wing_transform": [[0,0,1,8.635],[0,-1,0,-7.0045],[1,0,0,16.70265],[0,0,0,1]],
+  "pin_axis": [12.385, -10.734, 0],
+  "seam_y_aligned": -15.3107,
+  "graft_overlap": 0.5,
+  "body_guard_y_original": -28.9,
+  "coupon_bounds_original": [[6.474,-36,13],[100,100,65.5]],
+  "coupon_orientation": [[0,0,1,0],[0,-1,0,0],[1,0,0,0],[0,0,0,1]],
+  "angles_deg": [0,15,30,45,60,75,90],
+  "axial_offsets_mm": [0,20],
+  "pin_radius": 0.875,
+  "pin_z_range": [6,88],
+  "volume_tolerance_mm3": 0.0001,
+  "signature_tolerance_mm": 0.0001,
+  "source_signatures_original": {
+    "holster": {"faces":17346,"bounds":[[-20.3349990845,-14.6840000153,-12.7000007629],[35.3849868774,97.8372573853,129.9309997559]]},
+    "wing": {"faces":1568,"bounds":[[0,0,0],[50.4489746094,50.7973022461,7.5]]},
+    "carrier": {"faces":4232,"bounds":[[-19.2213993073,-125.1908798218,1.5648000240],[14.1739997864,-19.8317680359,85.6548004150]]}
+  }
+}

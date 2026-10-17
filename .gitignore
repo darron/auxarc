@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+/inputs/
+/build/
+# Upstream meshes, derivative meshes, and personal photos stay local.
+*.stl
+*.STL
+*.3mf
+*.glb
+*.obj
+*.jpeg
+*.jpg
+.DS_Store

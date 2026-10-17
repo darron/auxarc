@@ -1,0 +1,114 @@
+{
+  "checks": {
+    "watertight": true,
+    "consistent_winding": true,
+    "single_solid": true,
+    "positive_volume": true,
+    "body_preserved": true,
+    "no_holster_interference_at_sampled_poses": false,
+    "straight_1_75_mm_pin_clear": true
+  },
+  "tolerance_mm3": 0.0001,
+  "body_guard_y_original_mm": -28.9,
+  "body_difference_mm3": 0.0,
+  "intersections": [
+    {
+      "angle_deg": 0,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 28.69258106367342
+    },
+    {
+      "angle_deg": 15,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 4.472963027373908
+    },
+    {
+      "angle_deg": 30,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.25680345154501083
+    },
+    {
+      "angle_deg": 45,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.13188507117736967
+    },
+    {
+      "angle_deg": 60,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.27445731910112653
+    },
+    {
+      "angle_deg": 75,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 4.52507521065445
+    },
+    {
+      "angle_deg": 90,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 28.851863785980942
+    },
+    {
+      "angle_deg": 0,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 28.692581056559543
+    },
+    {
+      "angle_deg": 15,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 4.472963108802863
+    },
+    {
+      "angle_deg": 30,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.25680344729122834
+    },
+    {
+      "angle_deg": 45,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.13188506686500054
+    },
+    {
+      "angle_deg": 60,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.27445731718603383
+    },
+    {
+      "angle_deg": 75,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 4.525075166818776
+    },
+    {
+      "angle_deg": 90,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 28.85186355384455
+    }
+  ],
+  "pin_intersections_mm3": {
+    "carrier": [
+      0.0,
+      0.0
+    ],
+    "holster": [
+      0.0
+    ]
+  },
+  "mesh": {
+    "faces": 4232,
+    "bounds_mm": [
+      [
+        -19.221400009155275,
+        -125.19087921142578,
+        1.5647998298645018
+      ],
+      [
+        14.173999084472657,
+        -19.831767902374267,
+        85.6548033203125
+      ]
+    ],
+    "volume_mm3": 66596.7525968539,
+    "watertight": true,
+    "consistent_winding": true,
+    "single_solid": true
+  }
+}

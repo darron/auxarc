@@ -1,0 +1,128 @@
+{
+  "case": "glock-iwb-v1",
+  "input_frame": "aligned",
+  "case_sha256": "a7c9909b422054eb842a742b9b40314e02078749e073877969832804845ad71d",
+  "inputs": {
+    "carrier": {
+      "file": "carrier_aligned.stl",
+      "sha256": "491d089a249c6b62f63cc30c2a1ea13e835bad85a8086ffd20d6fb1439190353",
+      "mesh": {
+        "faces": 4232,
+        "bounds_mm": [
+          [
+            -17.060400009155273,
+            -112.14337921142578,
+            4.460899829864502
+          ],
+          [
+            16.334999084472656,
+            -6.784267902374268,
+            88.5509033203125
+          ]
+        ],
+        "volume_mm3": 66596.75259685388,
+        "watertight": true,
+        "consistent_winding": true,
+        "single_solid": true
+      }
+    },
+    "wing": {
+      "file": "wing_aligned.stl",
+      "sha256": "244cd2ea8d14393217bc94c444e291868b8077c0aa60455f7ceeb096ba1a865f",
+      "mesh": {
+        "faces": 1568,
+        "bounds_mm": [
+          [
+            8.635000228881836,
+            -57.80180358886719,
+            16.70265007019043
+          ],
+          [
+            16.135000228881836,
+            -7.004499912261963,
+            67.15162658691406
+          ]
+        ],
+        "volume_mm3": 13895.603624304977,
+        "watertight": true,
+        "consistent_winding": true,
+        "single_solid": true
+      }
+    },
+    "holster": {
+      "file": "holster_reference.stl",
+      "sha256": "2b198f43a32441787572c76fcfcb41051369db08cd5445376cc8bec781482cb9",
+      "mesh": {
+        "faces": 17346,
+        "bounds_mm": [
+          [
+            -20.334999084472656,
+            -14.684000015258789,
+            -12.700000762939453
+          ],
+          [
+            35.384986877441406,
+            97.8372573852539,
+            129.93099975585938
+          ]
+        ],
+        "volume_mm3": 138402.1651890636,
+        "watertight": true,
+        "consistent_winding": true,
+        "single_solid": false
+      }
+    }
+  },
+  "dependencies": {
+    "numpy": "2.5.4",
+    "trimesh": "5.1.1",
+    "manifold3d": "3.5.4",
+    "networkx": "3.7"
+  },
+  "outputs": {
+    "Mag_Carrier_Corrected_Hinge_v1.stl": {
+      "sha256": "1e48cc4ef382ea8fc57f00715b093237323f28512b49b6d964b6be38f2e2bd0a",
+      "mesh": {
+        "faces": 4116,
+        "bounds_mm": [
+          [
+            -19.221399307250977,
+            -125.19087982177734,
+            1.5647997856140137
+          ],
+          [
+            14.173998832702637,
+            -20.052000045776367,
+            85.65480041503906
+          ]
+        ],
+        "volume_mm3": 66252.45767712937,
+        "watertight": true,
+        "consistent_winding": true,
+        "single_solid": true
+      }
+    },
+    "Carrier_Hinge_Fit_Test_v1.stl": {
+      "sha256": "920c299c4855d5f5481667f6d27d78a17f320d5b3e5a759c3277b95038979269",
+      "mesh": {
+        "faces": 898,
+        "bounds_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            52.5,
+            15.947999954223633,
+            7.69999885559082
+          ]
+        ],
+        "volume_mm3": 4395.703778818502,
+        "watertight": true,
+        "consistent_winding": true,
+        "single_solid": true
+      }
+    }
+  }
+}

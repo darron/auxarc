@@ -1,0 +1,114 @@
+{
+  "checks": {
+    "watertight": true,
+    "consistent_winding": true,
+    "single_solid": true,
+    "positive_volume": true,
+    "body_preserved": true,
+    "no_holster_interference_at_sampled_poses": true,
+    "straight_1_75_mm_pin_clear": true
+  },
+  "tolerance_mm3": 0.0001,
+  "body_guard_y_original_mm": -28.9,
+  "body_difference_mm3": 0.0,
+  "intersections": [
+    {
+      "angle_deg": 0,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 15,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 30,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 45,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 60,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 75,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 90,
+      "axial_offset_mm": 0,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 0,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 15,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 30,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 45,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 60,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 75,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.0
+    },
+    {
+      "angle_deg": 90,
+      "axial_offset_mm": 20,
+      "intersection_mm3": 0.0
+    }
+  ],
+  "pin_intersections_mm3": {
+    "carrier": [
+      0.0,
+      0.0
+    ],
+    "holster": [
+      0.0
+    ]
+  },
+  "mesh": {
+    "faces": 4116,
+    "bounds_mm": [
+      [
+        -19.221399307250977,
+        -125.19087982177734,
+        1.5647997856140137
+      ],
+      [
+        14.173998832702637,
+        -20.052000045776367,
+        85.65480041503906
+      ]
+    ],
+    "volume_mm3": 66252.45767712937,
+    "watertight": true,
+    "consistent_winding": true,
+    "single_solid": true
+  }
+}
